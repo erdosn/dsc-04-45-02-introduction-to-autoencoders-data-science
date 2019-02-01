@@ -16,13 +16,30 @@ You will be able to:
 - Learn important properties, architectures and loss functions for typical AEs
 
 
+### What is the purpose of an autoencoder
+* We get the best approximation of the function that creates the input
+* Generate new things similar to input, find things not similar to input 
+* Get the most important 'part' of the data (concentrate the data, like tea) - Britta
+* Why would we want to generate data similar to our data
+    * anomaly detection
+        * pictures
+    * classification
+    * cleaning data
+        * taking images that are not clear, clean image for a clearer picture
+* Generate facial expressions
+* Train Data
+    * Adding noise to the data can make the model more variant and less biased
+
 ## What are Autoencoders?
 
-Autoencoders use unsupervised learning technique  that uses feedforward neural networks. In autoencoders, __the input is the same as the output__. They compress the input into a lower-dimensional code called the summary or __Representation__. Autoencoders then reconstruct the output from this representation, instead of the input. This “compression” representation of the input is called the __Latent-space Representation__, and this task is described as __Representation Learning__. 
+Autoencoders use **unsupervised learning technique**  that uses feedforward neural networks. In autoencoders, __the input is the same as the output__. They compress the input into a lower-dimensional code called the summary or __Representation__. Autoencoders then reconstruct the output from this representation, instead of the input. This “compression” representation of the input is called the __Latent-space Representation__, and this task is described as __Representation Learning__. 
 
-__Specifically, autoencoders (or AEs) are neural network architecture such that impose a "Bottleneck" in the network which forces a compressed knowledge representation of the original input.__
+__Specifically, autoencoders (or AEs) are neural network architecture that impose a "Bottleneck" in the network which forces a compressed knowledge representation of the original input.__
 
 In the following image, we san see the original inputs $x_1 .. x_6$ are first compressed in a bottleneck which is simply a layer with much less number of neurons. The Latent speace representation $a_1 .. a_3$ is learnt from the input data and is used to reconsutruct the outputs $\hat{x_1} .. \hat{x_6}$.  
+
+### What Are Autoencoders (for laypeople)?
+* Blur our data, then try to reconstruct it from the blur
 
 <img src="rep1.png" width=600>
 
@@ -52,7 +69,7 @@ where we want $r$ as close as the original input $x$
 If the soul purpose of autoencoders was to copy the input to the output, they would be pretty useless. 
 It is actually the latent representation $h$ above that is interest to us as it can help us learn some useful properties of underlying data.
 
-One way to obtain useful features from the autoencoder is to constrain $h$ to have smaller dimensions than $x$ to create an __Undercomplete AE__, thus forcing force the autoencoder to learn the most salient features of the training data. 
+One way to obtain useful features from the autoencoder is to constrain $h$ to have smaller dimensions than $x$ to create an __Undercomplete AE__, thus forcing force the autoencoder to learn the most salient (they copied Britta, filtering tea) features of the training data. 
 
 If the autoencoder is given too much capacity, it can copy $x$ to $r$ task without extracting any useful information about the distribution of $x$. This can also occur if the dimension of the latent representation is the same as the input, and in the __Overcomplete AE__, where the dimension of the latent representation is greater than the input. 
 
@@ -92,6 +109,7 @@ Note that the decoder architecture is the mirror image of the encoder. This is n
 
 The ideal autoencoder model balances the following:
 
+** Bias/Variance Tradeoff **
 - Sensitive enough to accurately build a reconstruction from inputs.
 - Insensitive enough not to directly memorize/overfit to the inputs. 
 
@@ -112,7 +130,7 @@ This measures how close the reconstructed input $z$ is to the original input $x$
 
 $$L(x,z)=−\sum_k^d[x_k log(z_k)+(1−x_k)log(1−z_k)]$$
 
-> __Note: Autoencoders are trained the same way as ANNs, via backpropagation.__
+> __Note: Autoencoders are trained the same way as ANNs (Artifical Neural Networks), via backpropagation.__
 
 ### AE Hyper-parameters
 
